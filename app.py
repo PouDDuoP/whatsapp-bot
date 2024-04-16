@@ -17,14 +17,15 @@ def welcome():
 def verify_token():
     try:
         token = request.args.get('hub.verify_foken')
-        challenge = request.args.get('hub.challenge')
+        challenge = request.args.get('hub.challenge')\
+        
+        if token == setting.TOKEN and challenge != None:
+            return challenge
+        else:
+            return 'Invalid token',403
+        
     except Exception as e:
         return e,403
-    
-    if token == setting.TOKEN and challenge != None:
-        return challenge,200
-    else:
-        return 'Invalid token',403
 
 @app.route('/webhook', methods=['POST'])
 def recive_message():
@@ -33,7 +34,7 @@ def recive_message():
         entry = body['entry'][0]
         changes = entry['changes'][0]
         value = changes['value']
-        message = value['message'][0]
+        message = value['messages'][0]
         number = message['from']
         messageId = message['id']
         contacts = value['contacts'][0]
@@ -44,7 +45,7 @@ def recive_message():
         return 'Message sent'
     
     except Exception as e:
-        return 'Unsent message'
+        return 'Unsent message ' + str(e)
 
 if __name__ == '__main__':
     app.run()

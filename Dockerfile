@@ -19,6 +19,7 @@ EXPOSE 5000
 # CMD python manage.py runserver 0.0.0.0:8000
 
 ENV FLASK_DEBUG: on
-ENV FLASK_APP=./test.py
+ENV FLASK_APP=./app.py
 CMD ["flask", "--debug", "run", "--host", "0.0.0.0"]
+# CMD ["flask", "run", "--host", "0.0.0.0"]
 
