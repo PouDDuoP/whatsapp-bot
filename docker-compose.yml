@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  whtasapp-bot:
+    container_name: app
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/home/app
+    environment:
+      - PG_USER=postgres
+      - PG_PASSWORD=12345
+      - PG_DB=postgres
+      - PG_PORT=5432
+      - PG_HOST=db
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
