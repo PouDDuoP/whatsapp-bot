@@ -163,13 +163,13 @@ def get_media_id(mediaName, mediaType):
   mediaId = ""
   
   if mediaType == "sticker":
-    mediaId = setting.STICKERS.get[mediaName, None]
+    mediaId = setting.STICKERS.get(mediaName, None)
   # elif mediaType == "image":
-  #   mediaId = setting.IMAGES.get[mediaName, None]
+  #   mediaId = setting.IMAGES.get(mediaName, None)
   # elif mediaType == "video":
-  #   mediaId = setting.VIDEOS.get[mediaName, None]
+  #   mediaId = setting.VIDEOS.get(mediaName, None)
   # elif mediaType == "audio":
-  #   mediaId = setting.AUDIOS.get[mediaName, None]
+  #   mediaId = setting.AUDIOS.get(mediaName, None)
   return mediaId
 
 def reply_reaction_message(number, messageId, emoji):
@@ -266,12 +266,12 @@ def manage_chatbot(text, number, messageId, name):
 
     body = "¿Desa una cita con algun ejecutivo para proseguir con la cotizacion?"
     footer = "Footer ChatBot KAAG"
-    options = ["✅ Sí, agenda reunión", "No, gracias." ]
+    options = ["✅ Sí, agenda reunion", "No, gracias." ]
 
     replyButtonData = button_reply_message(number, options, body, footer, "sed4", messageId)
     list.append(replyButtonData)
     
-  elif "sí, agenda reunión" in text :
+  elif "si, agenda reunion" in text :
       body = "Estupendo. Por favor indique una hora para la reunión:"
       footer = "Footer ChatBot KAAG"
       options = ["📅 Mañana a las 10:00 AM", "📅 Mañana a las 2:00 PM", "📅 Mañana a las 4:00 PM"]
@@ -294,6 +294,16 @@ def manage_chatbot(text, number, messageId, name):
   else :
       data = text_message(number, "Lo siento, no entendí lo que dijiste. ¿Quieres que te ayude con alguna de estas opciones?")
       list.append(data)
+      
+      body = "Servicios disponibles:"
+      footer = "Footer ChatBot KAAG"
+      options = ["Carta aval", "Asistencia de viaje", "Cotizacion de poliza"]
+      
+      listReplyData = list_reply_message(number, options, body, footer, "sed2", messageId)
+      sticker = sticker_message(number, get_media_id('poyo_feliz', "sticker"))
+      
+      list.append(listReplyData)
+      list.append(sticker)
 
   for item in list:
       send_message_whatsapp(item)
