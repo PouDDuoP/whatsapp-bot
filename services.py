@@ -138,7 +138,7 @@ def document_message(number, url, caption, filename):
       "to": number,
       "type": "document",
       "document": {
-        "url": url,
+        "link": url,
         "caption": caption,
         "filename": filename
       }
