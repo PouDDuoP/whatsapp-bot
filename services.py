@@ -252,7 +252,7 @@ def manage_chatbot(text, number, messageId, name):
     replyButtonData = button_reply_message(number, options, body, footer, "sed3", messageId)
     list.append(replyButtonData)
     
-  elif "si, envía el pdf" in text:
+  elif "si, envia el pdf" in text:
     sticker = sticker_message(number, get_media_id("pelfet", "sticker"))
     textMessage = text_message(number, "Por favor espera un momento.")
 
@@ -266,7 +266,7 @@ def manage_chatbot(text, number, messageId, name):
 
     body = "¿Desa una cita con algun ejecutivo para proseguir con la cotizacion?"
     footer = "Footer ChatBot KAAG"
-    options = ["✅ Sí, agenda reunion", "No, gracias." ]
+    options = ["✅ Si, agenda reunion", "No, gracias." ]
 
     replyButtonData = button_reply_message(number, options, body, footer, "sed4", messageId)
     list.append(replyButtonData)
