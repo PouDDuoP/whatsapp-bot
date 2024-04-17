@@ -64,7 +64,7 @@ def button_reply_message(number, options, body, footer, sedd, messageId):
         "type": "reply",
         "reply": {
           "id": sedd + "_btn_" + str(i+1),
-          "text": option
+          "title": option
         }
       }
     )
